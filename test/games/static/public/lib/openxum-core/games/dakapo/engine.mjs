@@ -37,6 +37,7 @@ class Engine extends OpenXum.Engine {
     }
 
     get_possible_move_list() {
+        let list = this._get_possible_coordinates();
         let colors = [Color.BLUE,Color.RED,Color.YELLOW,Color.GREEN];
         let moves = [];
 
@@ -90,38 +91,30 @@ class Engine extends OpenXum.Engine {
     }
 
     _is_possible(move) {
-        if(move._x >= 8 || move._x < 0 || move._y >= 8 || move._y < 0 ){
+        if(move._x >= 8 || move._x < 0 || move._y >= 8 || move._y >= 8){
             return false;
         }
         if(move._color === this._color){
             return false;
         }
-        else if(this._board[move._abs][move._ord] !== Color.NONE ){
+        else if(this_board[move._abs][move._ord] !== Color.NONE ){
             return false;
         }
-        else if(move._abs+1<8){
-            if(this._board[move._abs+1][move._ord] === move._color ){
-                return false;
-            }
+        else if(this_board[move._abs+1][move._ord] === move._color ){
+            return false;
         }
-        else if(move._abs-1>0){
-            if(this._board[move._abs-1][move._ord] === move._color){
-                return false;
-            }
+        else if(this_board[move._abs-1][move._ord] === move._color){
+            return false;
         }
-        else if(move._ord+1<8) {
-            if (this._board[move._abs][move._ord + 1] === move._color) {
-                return false;
-            }
+        else if(this_board[move._abs][move._ord+1] === move._color){
+            return false;
         }
-        else if(move._abs-1>0) {
-            if (this._board[move._abs][move._ord - 1] === move._color) {
-                return false;
-            }
+        else if(this_board[move._abs][move._ord-1] === move._color) {
+            return false;
         }
-            else if(this._board[move._abs][move._ord-1] === Color.NONE && this._board[move._abs][move._ord+1] === Color.NONE && this._board[move._abs-1][move._ord] === Color.NONE && this._board[move._abs+1][move._ord] === Color.NONE) {
-                return false;
-            }
+        else if(this_board[move._abs][move._ord-1] === Color.NONE && this_board[move._abs][move._ord+1] === Color.NONE && this_board[move._abs-1][move._ord] === Color.NONE && this_board[move._abs+1][move._ord] === Color.NONE) {
+            return false;
+        }
         return true;
     }
 
@@ -135,11 +128,11 @@ class Engine extends OpenXum.Engine {
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 8; j++) {
                 if(this._board[i][j] !== Color.NONE){
-                    return false;
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 
     // regarde si on a gagné
@@ -150,6 +143,7 @@ class Engine extends OpenXum.Engine {
         else if(this.get_possible_move_list().length === 0){
             this._phase = Phase.FINISH;
         }
+
     }
 
 
@@ -166,8 +160,8 @@ class Engine extends OpenXum.Engine {
             }
         }
         this._board[3][3] = 1;
-        this._board[3][4] = 3;
-        this._board[4][3] = 2;
+        this._board[3][4] = 2;
+        this._board[4][3] = 3;
         this._board[4][4] = 0;
     }
 
