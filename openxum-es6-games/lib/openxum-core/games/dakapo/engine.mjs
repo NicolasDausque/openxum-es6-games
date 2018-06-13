@@ -17,7 +17,6 @@ class Engine extends OpenXum.Engine {
 
     // public methods
     apply_moves(moves) {
-
         for (let i = 0; i < moves.length; ++i) {
             this.move(new Move(moves[i]._color, moves[i]._abs, moves[i]._ord));
         }
