@@ -118,6 +118,17 @@ class Gui extends OpenXum.Gui {
 
 
     _on_click(x, y) {
+        let change_color=false;
+        if (pos.y < this._offsetY - 5 && pos.y > this._offsetY - 25) { // TOP
+            if (pos.x < this._offsetX - 5 && pos.x > this._offsetX - 25) {
+                this._selected_color = this._free_colors[0];
+                change_color = true;
+            } else if (pos.x > this._offsetX + 6 * this._deltaX + 5 &&
+                pos.x < this._offsetX + 6 * this._deltaX + 25) {
+                this._selected_color = this._free_colors[1];
+                change_color = true;
+            }
+
         this._move = new Dakapo.Move(this._selected_color,x,y);
         this._engine._board[this._move._abs][this._move._ord]=this._move._color;
         //this.move(this._move, Dakapo.Color.RED);
