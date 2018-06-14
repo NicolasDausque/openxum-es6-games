@@ -94,10 +94,10 @@ class Player {
     return score;
   }
 
-  _negamax(e, depth, alpha, beta, c) {
-    if (depth === 0 || e.is_finished()) {
-      return ((c === this._color) ? this._evaluate(e, c, depth) : -this._evaluate(e, c, depth)) ;
-    }
+    _negamax(e, depth, alpha, beta, c) {
+        if (depth === 0 || e.is_finished()) {
+            return ((c === this._color) ? this._evaluate(e, c, depth) : -this._evaluate(e, c, depth));
+        }
 
     let possibleMoves = e.get_possible_move_list();
     let best_value = -Infinity;
