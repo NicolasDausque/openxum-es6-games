@@ -28,7 +28,7 @@ class Player {
         max = tmpMax;
         chosenMoves = [];
         chosenMoves.push(possibleMoves[coup]);
-      } else if (tmpMax == max) {
+      } else if (tmpMax === max) {
         chosenMoves.push(possibleMoves[coup]);
       }
     }

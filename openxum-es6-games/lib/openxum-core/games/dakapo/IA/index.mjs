@@ -1,12 +1,12 @@
 "use strict";
 
 // namespace IAHnefatafl
-let IAHnefatafl = { };
+let IAdakapoPlayer = { };
 
 import Player from './player.mjs';
 
-IAHnefatafl = Object.assign(IAHnefatafl, Player);
+IAdakapoPlayer = Object.assign(IAdakapoPlayer, Player);
 
 export default {
-    IAHnefatafl: IAHnefatafl
+    IAdakapoPlayer: IAdakapoPlayer
 };
