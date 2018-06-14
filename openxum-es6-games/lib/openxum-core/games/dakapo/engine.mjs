@@ -208,51 +208,49 @@ class Engine extends OpenXum.Engine {
         }
         let x;
         let y;
-        for (let k =0; k<list.length-2; k++){
+        for (let k =0; k<list.length; k++){
 
-            x=move._abs-list[k]._abs;
-            y=move._ord-list[k]._ord;
-            console.log("fils");
-            if(list[k]._abs+x < 8 && list[k]._abs+x >= 0 && list[k]._ord+y < 8 & list[k]._ord+y >= 0){
-                if(this._board[list[k]._abs+x][list[k]._ord+y] === move._color){
-                    console.log("fils2");
-                    if(list[k]._abs+x-y < 8 && list[k]._abs+x-y >= 0 && list[k]._ord+y+x < 8 && list[k]._ord+y+x >= 0) {
-                        console.log("fils3");
-                        if (this._board[list[k]._abs + x - y][list[k]._ord + y + x] === move._color) {
-                            console.log("fils4");
+            x=list[k]._abs-move._abs;
+            y=list[k]._ord-move._ord;
+
+
+            console.log(move._abs);
+            console.log(move._ord);
+
+
+            console.log(list[k]._abs);
+            console.log(list[k]._ord);
+
+            if(list[k]._abs+y < 8 && list[k]._abs+y >= 0 && list[k]._ord-x < 8 && list[k]._ord-x >= 0){
+                console.log("way1");
+                console.log(list[k]._abs+y);
+                console.log(list[k]._ord-x);
+                if(this._board[list[k]._abs+y][list[k]._ord-x] === move._color){
+
+                    if(list[k]._abs+y-x < 8 && list[k]._abs+y-x >= 0 && list[k]._ord-x-y < 8 && list[k]._ord-x-y >= 0) {
+                        console.log(list[k]._abs+x-y);
+                        console.log(list[k]._ord-y-x);
+                        if (this._board[list[k]._abs+y-x][list[k]._ord -x -y] === move._color) {
+
                             return true;
                         }
                     }
                 }
             }
-            else if(list[k]._abs-y < 8 && list[k]._abs-y >= 0 && list[k]._ord-x < 8 && list[k]._ord-x >= 0){
-                console.log("fils2");
-                if(this._board[list[k]._abs-y][list[k]._ord-x] === move._color){
-                    if(list[k]._abs-y-x < 8 && list[k]._abs-y-x >= 0 && list[k]._ord-x+y < 8 && list[k]._ord-x+y >= 0){
-                        if(this._board[list[k]._abs-y-x][list[k]._ord-x+y] === move._color){
+            else if(list[k]._abs-y < 8 && list[k]._abs-y >= 0 && list[k]._ord+x < 8 && list[k]._ord+x >= 0){
+                console.log("badway");
+                console.log(move._color);
+                if(this._board[list[k]._abs-y][list[k]._ord+x] === move._color){
+
+                    if(list[k]._abs-y-x < 8 && list[k]._abs-y-x >= 0 && list[k]._ord+x-y < 8 && list[k]._ord+x-y >= 0){
+                        console.log(move._color);
+                        if(this._board[list[k]._abs-y-x][list[k]._ord+x-y] === move._color){
+
                             return true;
                         }
                     }
                 }
             }
-            /*else if(list[k]._abs-y < 8 && list[k]._abs-y >= 0 && list[k]._ord+x < 8 && list[k]._ord+x >= 0){
-             if(this._board[list[k]._abs-y][list[k]._ord+x] === move._color){
-             if(list[k]._abs-y+x < 8 && list[k]._abs-y+x >= 0 && list[k]._ord+x+y < 8 && list[k]._ord+x+y >= 0){
-             if(this._board[list[k]._abs-y+x][list[k]._ord+x+y] === move._color){
-             return true;
-             }
-             }
-             }
-             }
-             else if(list[k]._abs-y < 8 && list[k]._abs-y >= 0 && list[k]._ord+x < 8 && list[k]._ord+x >= 0){
-             if(this._board[list[k]._abs-y][list[k]._ord+x] === move._color){
-             if(list[k]._abs-y+x < 8 && list[k]._abs-y+x >= 0 && list[k]._ord+x+y < 8 && list[k]._ord+x+y >= 0){
-             if(this._board[list[k]._abs-y+x][list[k]._ord+x+y] === move._color){
-             return true;
-             }
-             }
-             }
-             }*/
         }
         return false;
     }
