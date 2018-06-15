@@ -11,6 +11,7 @@ class Engine extends OpenXum.Engine {
 
         this._phase = Phase.EN_COURS;
         this._color = Color.NONE;
+        this._last_move = [];
         this.init_board_array();
 
     }
@@ -64,18 +65,15 @@ class Engine extends OpenXum.Engine {
                 this._board[move._abs][move._ord] = move._color;
                 this._color = move._color;
                 this._victory(move);
+                this._last_move.push(move);
             }
         }
     }
 
     parse(str) {
-        // TODO
-
     }
 
     to_string() {
-        // TODO
-
     }
 
     winner_is() {
@@ -85,8 +83,6 @@ class Engine extends OpenXum.Engine {
             return false;
         }
     }
-
-    // private methods
 
     _get_phase() {
         return this._phase;
@@ -198,6 +194,8 @@ class Engine extends OpenXum.Engine {
 
     _carre(move) {
         let list = [];
+        let x;
+        let y;
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 8; j++) {
                 if (this._board[i][j] === move._color && (i !== move._abs || j !== move._ord )) {
@@ -205,8 +203,6 @@ class Engine extends OpenXum.Engine {
                 }
             }
         }
-        let x;
-        let y;
         for (let k = 0; k < list.length; k++) {
 
             x = list[k]._abs - move._abs;
@@ -214,21 +210,8 @@ class Engine extends OpenXum.Engine {
 
             if (list[k]._abs + y < 8 && list[k]._abs + y >= 0 && list[k]._ord - x < 8 && list[k]._ord - x >= 0) {
                 if (this._board[list[k]._abs + y][list[k]._ord - x] === move._color) {
-
                     if (list[k]._abs + y - x < 8 && list[k]._abs + y - x >= 0 && list[k]._ord - x - y < 8 && list[k]._ord - x - y >= 0) {
                         if (this._board[list[k]._abs + y - x][list[k]._ord - x - y] === move._color) {
-
-                            return true;
-                        }
-                    }
-                }
-            }
-            else if (list[k]._abs - y < 8 && list[k]._abs - y >= 0 && list[k]._ord + x < 8 && list[k]._ord + x >= 0) {
-                if (this._board[list[k]._abs - y][list[k]._ord + x] === move._color) {
-
-                    if (list[k]._abs - y - x < 8 && list[k]._abs - y - x >= 0 && list[k]._ord + x - y < 8 && list[k]._ord + x - y >= 0) {
-                        if (this._board[list[k]._abs - y - x][list[k]._ord + x - y] === move._color) {
-
                             return true;
                         }
                     }
@@ -237,8 +220,6 @@ class Engine extends OpenXum.Engine {
         }
         return false;
     }
-
-
 }
 
 export default Engine;

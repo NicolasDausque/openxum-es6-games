@@ -15,13 +15,10 @@ class Move {
     return this._color;
   }
 
-  // a quoi sert elle ?
-  get() {
-    return (this._color === Color.RED ? 'R' : 'Y') + this._letter + this._number +
-      (this._position === Position.BOTTOM ? 'b' :
-        (this._position === Position.TOP ? 't' :
-          (this._position === Position.RIGHT ? 'r' : 'l')));
-  }
+// a quoi sert elle ?
+    get() {
+        return (parseInt(this._color) === Color.RED ? 'r' : parseInt(this._color) === Color.BLUE ? 'b' : parseInt(this._color) === Color.GREEN ? 'g' : 'y') + this._abs + this._ord ;
+    }
 
 
 
