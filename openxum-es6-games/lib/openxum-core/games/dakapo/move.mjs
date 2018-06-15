@@ -1,7 +1,6 @@
 "use strict";
 
 import Color from './color.mjs';
-import Position from './position.mjs';
 
 class Move {
   constructor(c, x, y) {
@@ -23,9 +22,9 @@ class Move {
 
 
   parse(str) {
-    this._color = str.charAt(0) === 'R' ? Color.RED :
-        str.charAt(0) === 'B' ? Color.BLUE :
-            str.charAt(0) === 'G' ? Color.GREEN :
+    this._color = str.charAt(0) === 'r' ? Color.RED :
+        str.charAt(0) === 'b' ? Color.BLUE :
+            str.charAt(0) === 'g' ? Color.GREEN :
                 Color.YELLOW;
     this._abs = str.charCodeAt(1) - '1'.charCodeAt(0) + 1;
     this._ord = str.charCodeAt(2) - '1'.charCodeAt(0) + 1;

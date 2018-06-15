@@ -35,7 +35,6 @@ class Manager extends OpenXum.Manager {
     }
 
     process_move() {
-        console.log("je suis fan de tulipes");
     }
 }
 
