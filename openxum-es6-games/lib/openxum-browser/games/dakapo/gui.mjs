@@ -13,14 +13,11 @@ class Gui extends OpenXum.Gui {
         this._move = undefined;
         this._selected_piece = undefined;
         this._selected_color = Dakapo.Color.NONE;
-        this._color = Dakapo.Color.NONE;
     }
 
-    // public methods
     draw() {
         this._context.lineWidth = 1;
 
-        // background
         this._context.fillStyle = "#4C3629";
         this._round_rect(0, 0, this._canvas.width, this._canvas.height, 17, true, false);
 
@@ -31,7 +28,6 @@ class Gui extends OpenXum.Gui {
     }
 
     get_move() {
-
         return this._move;
     }
 
@@ -129,8 +125,8 @@ class Gui extends OpenXum.Gui {
             this._move = new Dakapo.Move(this._selected_color, pos.x, pos.y);
             this.__color = this._selected_color;
             this._selected_color = Dakapo.Color.NONE;
-            this.move(this._move, this._selected_color);
-            //this._engine._board[this._move._abs][this._move._ord]=this._move._color;
+            this._manager.play();
+            //this.move(this._move, this._selected_color);
             this._selected_color = Dakapo.Color.NONE;
         }
         else if (pos.y === -1) {

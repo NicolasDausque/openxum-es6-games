@@ -11,12 +11,12 @@ class Engine extends OpenXum.Engine {
 
         this._phase = Phase.EN_COURS;
         this._color = Color.NONE;
+        this._turn=0;
         this._last_move = [];
         this.init_board_array();
 
     }
 
-    // public methods
     apply_moves(moves) {
         for (let i = 0; i < moves.length; ++i) {
             this.move(new Move(moves[i]._color, moves[i]._abs, moves[i]._ord));
@@ -30,7 +30,7 @@ class Engine extends OpenXum.Engine {
     }
 
     current_color() {
-        return this._color;
+        return this._turn % 2 === 0 ? 'Joueur 2' : 'Joueur 1';
     }
 
     get_name() {
@@ -40,7 +40,6 @@ class Engine extends OpenXum.Engine {
     get_possible_move_list() {
         let colors = [Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN];
         let moves = [];
-
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 8; j++) {
                 for (let color in colors) {
@@ -49,7 +48,6 @@ class Engine extends OpenXum.Engine {
                     }
                 }
             }
-
         }
         return moves;
     }
@@ -62,8 +60,9 @@ class Engine extends OpenXum.Engine {
     move(move) {
         if (this.is_finished() === false) {
             if (this._is_possible(move) === true) {
-                this._board[move._abs][move._ord] = move._color;
-                this._color = move._color;
+                this._board[move._abs][move._ord] = parseInt(move._color);
+                this._turn=this._turn+1;
+                this._color = parseInt(move._color);
                 this._victory(move);
                 this._last_move.push(move);
             }
@@ -144,7 +143,6 @@ class Engine extends OpenXum.Engine {
         return true;
     }
 
-
     _set(_phase, _board) {
         this._phase = _phase;
         this._board = _board;
@@ -161,7 +159,6 @@ class Engine extends OpenXum.Engine {
         return true;
     }
 
-    // regarde si on a gagné
     _victory(move) {
         if (this._fullboard() === true) {
             this._phase = Phase.TIE;
@@ -174,8 +171,6 @@ class Engine extends OpenXum.Engine {
         }
     }
 
-
-// Appelé dans le constructeur
     init_board_array() {
         this._board = new Array(8);
         for (let x = 0; x < 8; x++) {
@@ -198,7 +193,7 @@ class Engine extends OpenXum.Engine {
         let y;
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 8; j++) {
-                if (this._board[i][j] === move._color && (i !== move._abs || j !== move._ord )) {
+                if (this._board[i][j] === parseInt(move._color) && (i !== move._abs || j !== move._ord )) {
                     list.push(new Move(this._board[i][j]._color, i, j));
                 }
             }
@@ -209,9 +204,9 @@ class Engine extends OpenXum.Engine {
             y = list[k]._ord - move._ord;
 
             if (list[k]._abs + y < 8 && list[k]._abs + y >= 0 && list[k]._ord - x < 8 && list[k]._ord - x >= 0) {
-                if (this._board[list[k]._abs + y][list[k]._ord - x] === move._color) {
+                if (this._board[list[k]._abs + y][list[k]._ord - x] === parseInt(move._color)) {
                     if (list[k]._abs + y - x < 8 && list[k]._abs + y - x >= 0 && list[k]._ord - x - y < 8 && list[k]._ord - x - y >= 0) {
-                        if (this._board[list[k]._abs + y - x][list[k]._ord - x - y] === move._color) {
+                        if (this._board[list[k]._abs + y - x][list[k]._ord - x - y] === parseInt(move._color)) {
                             return true;
                         }
                     }

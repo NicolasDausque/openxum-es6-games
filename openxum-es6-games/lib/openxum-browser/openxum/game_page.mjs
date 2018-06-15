@@ -52,9 +52,9 @@ class GamePage {
         if (str !== '') {
           let item = $('<li>');
           let move = this._manager.build_move();
-
           move.parse(str);
           item.html(move.to_string());
+
           item.appendTo(list);
         }
       });
@@ -142,7 +142,7 @@ class GamePage {
 //      if (this._engine.get_possible_move_list) {
 //        this._opponent = new OpenXum.MCTSPlayer(opponent_color, this._engine);
 //      } else {
-        this._opponent = new OpenXum.RandomPlayer(opponent_color, this._engine);
+        this._opponent = new OpenXum.Dakapo.IA.IADakapo.IADakapoPlayer(opponent_color, this._engine,2);
 //      }
     } else if (game_type === GameType.ONLINE) {
       if (username === owner_id) {

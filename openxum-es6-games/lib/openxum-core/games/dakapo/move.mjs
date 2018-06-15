@@ -14,14 +14,16 @@ class Move {
     return this._color;
   }
 
-// a quoi sert elle ?
-    get() {
-        return (parseInt(this._color) === Color.RED ? 'r' : parseInt(this._color) === Color.BLUE ? 'b' : parseInt(this._color) === Color.GREEN ? 'g' : 'y') + this._abs + this._ord ;
-    }
+  // a quoi sert elle ?
+  get() {
+    return (parseInt(this._color) === Color.RED ? 'r' : parseInt(this._color) === Color.BLUE ? 'b' : parseInt(this._color) === Color.GREEN ? 'g' : 'y') + this._abs + this._ord ;
+  }
 
 
 
   parse(str) {
+
+
     this._color = str.charAt(0) === 'r' ? Color.RED :
         str.charAt(0) === 'b' ? Color.BLUE :
             str.charAt(0) === 'g' ? Color.GREEN :
@@ -39,7 +41,7 @@ class Move {
   }
 
   to_string() {
-    return 'put ' + (this._color === Color.RED ? 'red' : this._color === Color.BLUE ? 'blue' : this._color === Color.GREEN ? 'green' : 'yellow') +
+    return 'put ' + (parseInt(this._color) === Color.RED ? 'red' : parseInt(this._color) === Color.BLUE ? 'blue' : parseInt(this._color) === Color.GREEN ? 'green' : 'yellow') +
       ' at (' + this._abs + ',' + this._ord + ').';
   }
 }

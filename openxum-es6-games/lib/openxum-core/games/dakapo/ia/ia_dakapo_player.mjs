@@ -1,9 +1,9 @@
 "use strict";
 
 import OpenXum from '../../../openxum/player.mjs';
-import IAHnefatafl from './player.mjs';
+import Player from './player.mjs';
 
-class IAdakapoPlayer extends OpenXum.Player {
+class IADakapoPlayer extends OpenXum.Player {
   constructor(c, e) {
     super(c, e);
   }
@@ -22,7 +22,7 @@ class IAdakapoPlayer extends OpenXum.Player {
   }
 
   move() {
-    return (new IAdakapoPlayer.Player(this._color, this._engine, 3)).move();
+    return (new Player(this._color, this._engine, 3)).move();
   }
 
   reinit(e) {
@@ -31,5 +31,5 @@ class IAdakapoPlayer extends OpenXum.Player {
 }
 
 export default {
-    IAdakapoPlayerPlayer: IAdakapoPlayerPlayer
+    IADakapoPlayer: IADakapoPlayer
 };
