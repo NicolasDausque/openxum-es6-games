@@ -77,9 +77,9 @@ class Engine extends OpenXum.Engine {
 
     winner_is() {
         if (this.is_finished()) {
-            return true;
+            return this._turn;
         } else {
-            return false;
+            return  this._turn;
         }
     }
 
@@ -145,7 +145,11 @@ class Engine extends OpenXum.Engine {
 
     _set(_phase, _board) {
         this._phase = _phase;
-        this._board = _board;
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                this._board[i][j] = _board[i][j];
+            }
+        }
     }
 
     _fullboard() {

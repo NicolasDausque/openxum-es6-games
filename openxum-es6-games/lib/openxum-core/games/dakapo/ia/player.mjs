@@ -11,13 +11,15 @@ class Player {
     move() {
         let possibleMoves = this._engine.get_possible_move_list();
         let chosenMove = possibleMoves[Math.floor(Math.random() * (possibleMoves.length - 1))];
-
+        let clone = this._engine.clone();
         for (let i = 0; i < possibleMoves.length-1; i++) {
-            if (this._engine._carre(possibleMoves[i]) === true) {
+            if (clone._carre(possibleMoves[i]) === true) {
                 chosenMove = possibleMoves[i];
                 break;
             }
         }
+
+
         return chosenMove;
     }
 
