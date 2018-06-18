@@ -30,7 +30,7 @@ class Engine extends OpenXum.Engine {
     }
 
     current_color() {
-        return this._turn % 2 === 0 ? 'Joueur 2' : 'Joueur 1';
+        return this._turn % 2 === 0 ? 'Joueur 1' : 'Joueur 2';
     }
 
     get_name() {
@@ -61,7 +61,6 @@ class Engine extends OpenXum.Engine {
         if (this.is_finished() === false) {
             if (this._is_possible(move) === true) {
                 this._board[move._abs][move._ord] = parseInt(move._color);
-                this._turn=this._turn+1;
                 this._color = parseInt(move._color);
                 this._victory(move);
                 this._last_move.push(move);
@@ -76,11 +75,7 @@ class Engine extends OpenXum.Engine {
     }
 
     winner_is() {
-        if (this.is_finished()) {
-            return this._turn;
-        } else {
             return  this._turn;
-        }
     }
 
     _get_phase() {
@@ -172,6 +167,9 @@ class Engine extends OpenXum.Engine {
         }
         else if (this._carre(move) === true) {
             this._phase = Phase.FINISH;
+        }
+        else{
+            this._turn=this._turn+1;
         }
     }
 
