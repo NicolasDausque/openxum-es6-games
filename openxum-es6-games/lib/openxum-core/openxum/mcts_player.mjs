@@ -6,7 +6,7 @@ import MCTS from '../mcts/player.mjs';
 class MCTSPlayer extends OpenXum.Player {
   constructor(c, e) {
     super(c, e);
-    this._level = 1000;
+    this._level = 500;
   }
 
 // public methods

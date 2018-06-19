@@ -142,8 +142,8 @@ class GamePage {
 //      if (this._engine.get_possible_move_list) {
 //        this._opponent = new OpenXum.MCTSPlayer(opponent_color, this._engine);
 //      } else {
-        this._opponent = new OpenXum.Dakapo.IA.IADakapo.IADakapoPlayer(0, this._engine,2);
-        //this._opponent = new OpenXum.MCTSPlayer('Joueur 2',this._engine);
+        //this._opponent = new OpenXum.Dakapo.IA.IADakapo.IADakapoPlayer(0, this._engine,2);
+        this._opponent = new OpenXum.MCTSPlayer('Joueur 2',this._engine);
 //      }
     } else if (game_type === GameType.ONLINE) {
       if (username === owner_id) {

@@ -6,6 +6,7 @@ class Player {
         this._color = c;
         this._engine = e;
         this._depth = depth;
+        this._cpt=0;
     }
 
     move() {
@@ -14,7 +15,7 @@ class Player {
 
         let clone = this._engine.clone();
         let score=-99999;
-        this._cpt=0;
+        this._cpt = this._cpt + possibleMoves.length-1;
         for (let i = 0; i < possibleMoves.length-1; i++) {
             if ( this._engine._carre(possibleMoves[i]) === true ){
                 chosenMove = possibleMoves[i];
@@ -28,6 +29,7 @@ class Player {
                 console.log(i);
             }
         }
+        console.log(this._cpt);
         return chosenMove;
     }
 
@@ -39,6 +41,7 @@ class Player {
 
 
         if(depth === 0) {
+            this._cpt = this._cpt + 1;
             if ( turn > 0){
                 return this._evaluer_max(move, aclone);
             }

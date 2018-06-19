@@ -32,11 +32,22 @@ class Player {
   _get_final_choice() {
     let finalChoice = this._root.get_child_nodes()[0].get_move();
     let best = this._root.get_child_nodes()[0].get_visit_number();
-
+      console.log(this._root.get_visit_number());
+      console.log(this._root._winNumber);
+      console.log(this._root.get_move());
     for (let i = 1; i < this._root.get_child_nodes().length; i++) {
       console.log(this._root.get_child_nodes()[i].get_visit_number());
       console.log(this._root.get_child_nodes()[i]._winNumber);
       console.log(this._root.get_child_nodes()[i].get_move());
+        for (let j = 1; j < this._root.get_child_nodes()[i].get_child_nodes().length; j++) {
+
+            console.log("sous branche");
+            console.log(this._root.get_child_nodes()[i].get_child_nodes()[j].get_visit_number());
+            console.log(this._root.get_child_nodes()[i].get_child_nodes()[j]._winNumber);
+            console.log(this._root.get_child_nodes()[i].get_child_nodes()[j].get_move());
+
+            console.log("fin  sous branche");
+        }
       if (this._root.get_child_nodes()[i].get_visit_number() > best) {
         best = this._root.get_child_nodes()[i].get_visit_number();
         finalChoice = this._root.get_child_nodes()[i].get_move();
@@ -104,7 +115,7 @@ class Player {
   _updateScore(current, winner) {
     while (current !== null) {
       current.visit();
-      if (winner === this._color) {
+      if (winner === current.get_engine().current_color()) {
         current.inc_wins();
       } else {
         current.inc_losses();
