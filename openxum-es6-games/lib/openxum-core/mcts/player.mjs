@@ -34,11 +34,15 @@ class Player {
     let best = this._root.get_child_nodes()[0].get_visit_number();
 
     for (let i = 1; i < this._root.get_child_nodes().length; i++) {
+      console.log(this._root.get_child_nodes()[i].get_visit_number());
+      console.log(this._root.get_child_nodes()[i]._winNumber);
+      console.log(this._root.get_child_nodes()[i].get_move());
       if (this._root.get_child_nodes()[i].get_visit_number() > best) {
         best = this._root.get_child_nodes()[i].get_visit_number();
         finalChoice = this._root.get_child_nodes()[i].get_move();
       }
     }
+    console.log("    dfsfgsdfgsdfgsdfg");
     return finalChoice;
   }
 

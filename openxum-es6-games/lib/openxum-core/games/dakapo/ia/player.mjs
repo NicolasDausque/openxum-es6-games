@@ -21,9 +21,11 @@ class Player {
                 break;
             }
             let score_tempo = this._get_score(possibleMoves[i], clone, this._depth, -1);
-            if ( score_tempo >= score) {
+            console.log(score_tempo);
+            if ( score_tempo > score) {
                 score = score_tempo;
                 chosenMove = possibleMoves[i];
+                console.log(i);
             }
         }
         return chosenMove;
@@ -32,67 +34,41 @@ class Player {
 
     _get_score(move, aclone, depth, turn){
 
-        if ( aclone._carre(move) === true ){
-            if ( turn > 0){
-                return 10000;
-            }
-            else if ( turn < 0){
-                return -10000;
-            }
-        }
-
         aclone.move(move);
-        let clone = aclone.clone();
-        let list = clone.get_possible_move_list();
+        let list = aclone.get_possible_move_list();
 
 
         if(depth === 0) {
             if ( turn > 0){
-                return this._evaluer_max(list, clone);
+                return this._evaluer_max(move, aclone);
             }
             else if ( turn < 0){
-                return this._evaluer_min(list, clone);
+                return this._evaluer_min(move, aclone);
             }
         }
 
         let score=0;
         for (let i = 0; i < list.length-1; i++) {
-            if ( turn > 0) {
-                let score_tempo = this._get_score(list[i], clone, depth - 1, turn * (-1));
-
-                if (score_tempo >= score) {
+                let score_tempo = this._get_score(list[i], aclone, depth - 1, -turn);
+                if (turn * score_tempo >= turn * score) {
                     score = score_tempo;
                 }
-            }
-            else if ( turn < 0){
-                let score_tempo = this._get_score(list[i], clone, depth - 1, turn * (-1));
-
-                if (score_tempo <= score) {
-                    score = score_tempo;
-                }
-            }
         }
         return score;
     }
 
-    _evaluer_min(list, clone){
-        let score=0;
-        for (let i = 0; i < list.length-1; i++) {
-            if ( clone._carre(list[i]) === true){
-                score = score - 1000;
+    _evaluer_min(move, clone){
+            if ( clone._carre(move) === true){
+                return - 1000;
             }
-        }
-        return score;
+            return 0;
     }
 
-    _evaluer_max(list, clone){
-        let score=0;
-        for (let i = 0; i < list.length-1; i++) {
-            if ( clone._carre(list[i]) === true){
-                score = score + 1000;
+    _evaluer_max(move, clone){
+            if ( clone._carre(move) === true){
+                return 1000;
             }
-        }
-        return score;
+        return 0;
     }
 
 

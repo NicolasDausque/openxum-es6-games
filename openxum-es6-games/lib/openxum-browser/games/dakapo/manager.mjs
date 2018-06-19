@@ -22,7 +22,7 @@ class Manager extends OpenXum.Manager {
     }
 
     get_winner_color() {
-        return this._engine.winner_is() % 2 === 0 ? 'Joueur 1' : 'Joueur 2';
+        return this._engine.winner_is();
     }
 
     process_move() {

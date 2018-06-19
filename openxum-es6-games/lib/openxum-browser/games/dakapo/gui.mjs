@@ -11,7 +11,6 @@ class Gui extends OpenXum.Gui {
         this._offsetX = 0;
         this._offsetY = 0;
         this._move = undefined;
-        this._selected_piece = undefined;
         this._selected_color = Dakapo.Color.NONE;
     }
 
@@ -40,7 +39,10 @@ class Gui extends OpenXum.Gui {
     }
 
     move(move, color) {
+
+        this._selected_color = Dakapo.Color.NONE;
         this._manager.play();
+        this._selected_color = Dakapo.Color.NONE;
         // TODO !!!!!
 
     }
@@ -122,12 +124,11 @@ class Gui extends OpenXum.Gui {
         let change_color = false;
         let pos = this._get_click_position(e);
         if (pos.x >= 0 && pos.x < 8 && pos.y >= 0 && pos.y < 8) {
+
             this._move = new Dakapo.Move(this._selected_color, pos.x, pos.y);
-            this.__color = this._selected_color;
-            this._selected_color = Dakapo.Color.NONE;
-            this._manager.play();
-            //this.move(this._move, this._selected_color);
-            this._selected_color = Dakapo.Color.NONE;
+            if (this._engine._is_possible(this._move) === true) {
+                this.move(this._move, this._selected_color);
+            }
         }
         else if (pos.y === -1) {
             if (pos.x === -1) {

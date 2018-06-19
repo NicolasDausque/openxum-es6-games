@@ -29,10 +29,6 @@ class Engine extends OpenXum.Engine {
         return o;
     }
 
-    current_color() {
-        return this._turn % 2 === 0 ? 'Joueur 1' : 'Joueur 2';
-    }
-
     get_name() {
         return 'Dakapo';
     }
@@ -42,9 +38,9 @@ class Engine extends OpenXum.Engine {
         let moves = [];
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 8; j++) {
-                for (let color in colors) {
-                    if (this._is_possible(new Move(color, i, j)) === true) {
-                        moves.push(new Move(color, i, j));
+                for (let index in colors) {
+                    if (this._is_possible(new Move(colors[index], i, j)) === true) {
+                        moves.push(new Move(colors[index], i, j));
                     }
                 }
             }
@@ -74,8 +70,12 @@ class Engine extends OpenXum.Engine {
     to_string() {
     }
 
+    current_color() {
+        return this._turn % 2 === 0 ? 'Joueur 1' : 'Joueur 2';
+    }
+
     winner_is() {
-            return  this._turn;
+        return  this.current_color();
     }
 
     _get_phase() {
@@ -85,7 +85,6 @@ class Engine extends OpenXum.Engine {
     _is_possible(move) {
         let caseadj = 0;
         let caseadj_max = 0;
-
         if (move._abs >= 8 || move._abs < 0 || move._ord >= 8 || move._ord < 0) {
             return false;
         }
@@ -160,7 +159,7 @@ class Engine extends OpenXum.Engine {
 
     _victory(move) {
         if (this._fullboard() === true) {
-            this._phase = Phase.TIE;
+            this._phase = Phase.FINISH;
         }
         else if (this.get_possible_move_list().length === 0) {
             this._phase = Phase.FINISH;

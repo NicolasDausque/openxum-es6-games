@@ -23,7 +23,8 @@ class MCTSPlayer extends OpenXum.Player {
   }
 
   move() {
-    return (new MCTS.Player(this._color, this._engine, this._level)).move();
+    let p = (new MCTS.Player(this._color, this._engine, 2000)).move();
+    return p;
   }
 
   reinit(e) {

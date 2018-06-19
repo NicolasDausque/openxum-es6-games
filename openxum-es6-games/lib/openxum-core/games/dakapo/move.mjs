@@ -11,7 +11,7 @@ class Move {
 
 // public methods
   color() {
-    return this._color;
+    return parseInt(this._color);
   }
 
   // a quoi sert elle ?
@@ -22,8 +22,6 @@ class Move {
 
 
   parse(str) {
-
-
     this._color = str.charAt(0) === 'r' ? Color.RED :
         str.charAt(0) === 'b' ? Color.BLUE :
             str.charAt(0) === 'g' ? Color.GREEN :
@@ -34,7 +32,7 @@ class Move {
 
   to_object() {
     return {
-      color: this._color,
+      color: parseInt(this._color),
       abs: this._abs,
       ord: this._ord
     };
