@@ -9,9 +9,9 @@ import Phase from './phase.mjs';
 import IA from './ia/index.mjs';
 
 export default {
-    Engine: Engine,
-    Move: Move,
-    Color: Color,
-    Phase: Phase,
-    IA: IA
+  Engine: Engine,
+  Move: Move,
+  Color: Color,
+  Phase: Phase,
+  IA: IA
 };

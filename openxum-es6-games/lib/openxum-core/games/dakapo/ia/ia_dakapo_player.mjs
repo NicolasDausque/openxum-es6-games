@@ -6,10 +6,9 @@ import Player from './player.mjs';
 class IADakapoPlayer extends OpenXum.Player {
   constructor(c, e, d) {
     super(c, e);
-    this._depth=d;
+    this._depth = d;
   }
 
-// public methods
   confirm() {
     return false;
   }
@@ -23,7 +22,7 @@ class IADakapoPlayer extends OpenXum.Player {
   }
 
   move() {
-    return (new Player(this._color, this._engine,this._depth )).move();
+    return (new Player(this._color, this._engine, this._depth)).move();
   }
 
   reinit(e) {
@@ -32,5 +31,5 @@ class IADakapoPlayer extends OpenXum.Player {
 }
 
 export default {
-    IADakapoPlayer: IADakapoPlayer
+  IADakapoPlayer: IADakapoPlayer
 };
