@@ -14,7 +14,7 @@ class Engine extends OpenXum.Engine {
     this._turn = 0;
     this._last_move = [];
     this.init_board_array();
-    this._color_count=[1,1,1,1];
+    this._color_count = [1, 1, 1, 1];
   }
 
   apply_moves(moves) {
@@ -59,7 +59,7 @@ class Engine extends OpenXum.Engine {
       if (this._is_possible(move)) {
         this._board[move._abs][move._ord] = parseInt(move._color);
         this._color = parseInt(move._color);
-        this._color_count[this._color]=this._color_count[this._color]+1;
+        this._color_count[this._color] = this._color_count[this._color] + 1;
         this._victory(move);
         this._last_move.push(move);
       }
@@ -94,7 +94,7 @@ class Engine extends OpenXum.Engine {
     if (this._board[move._abs][move._ord] !== Color.NONE) {
       return false;
     }
-    if (this._color_count[parseInt(move._color)] > 15){
+    if (this._color_count[parseInt(move._color)] > 15) {
       return false;
     }
   }
@@ -223,5 +223,4 @@ class Engine extends OpenXum.Engine {
   }
 
 }
-
 export default Engine;

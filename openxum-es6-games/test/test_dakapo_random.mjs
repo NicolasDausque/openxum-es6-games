@@ -2,10 +2,10 @@ import lib from '../lib/openxum-core/openxum';
 
 let cpt=0;
 
-for (let i=0; i<10000; i++){
+for (let i=0; i<10; i++){
 let e = new lib.OpenXum.Dakapo.Engine(0,0);
-let p1 = new lib.OpenXum.RandomPlayer('Joueur 1', e);
-let p2 = new lib.OpenXum.Dakapo.IA.IADakapo.IADakapoPlayer('Joueur 2', e,4);
+let p1 = new lib.OpenXum.MCTSPlayer('Joueur 1', e);
+let p2 = new lib.OpenXum.Dakapo.IA.IADakapo.IADakapoPlayer('Joueur 2', e,3);
 //let p2 = new lib.OpenXum.MCTSPlayer('Joueur 2', e);
 let p = p1;
 let moves = [];
@@ -23,4 +23,4 @@ if(e.winner_is() === 'Joueur 2'){
 }
 
 
-console.log(cpt/100);
+console.log(cpt);

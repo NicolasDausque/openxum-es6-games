@@ -10,19 +10,15 @@ class Player {
 
   move() {
     let possibleMoves = this._engine.get_possible_move_list();
-    let chosenMove = possibleMoves[Math.floor(Math.random() * (possibleMoves.length - 1))];
-    let clone = this._engine.clone();
-    let score = -1000000000;
-    let score_tempo;
+    let chosenMove = null; // possibleMoves[Math.floor(Math.random() * (possibleMoves.length - 1))];
+    let score0 = -10000000;
+    let score_tempo0;
 
     for (let i = 0; i < possibleMoves.length - 1; i++) {
-      if (this._engine._carre(possibleMoves[i])) {
-        chosenMove = possibleMoves[i];
-        break;
-      }
-      score_tempo = this._get_score(possibleMoves[i], clone, this._depth - 1, -1, score);
-      if (score_tempo > score) {
-        score = score_tempo;
+      let clone = this._engine.clone();
+      score_tempo0 = this._get_score(possibleMoves[i], clone, this._depth - 1, 1, score0);
+      if (score_tempo0 >= score0) {
+        score0 = score_tempo0;
         chosenMove = possibleMoves[i];
       }
     }
@@ -30,38 +26,50 @@ class Player {
   }
 
   _get_score(move, aclone, depth, turn, score_parent) {
-    let score = 0;
+    let score1 = 0;
     let list;
+    let next_turn = -turn;
+    let score_tempo1 = next_turn * 10000;
 
     aclone.move(move);
     if (depth === 0) {
-      return this._evaluer(move, aclone, turn);
+      return this._evaluer(move, aclone, turn, depth);
     }
     if (aclone._carre(move)) {
-      return turn * 100 * (10 ^ depth);
+      return turn * Math.pow(100, depth);
     }
     list = aclone.get_possible_move_list();
     for (let i = 0; i < list.length - 1; i++) {
-      let score_tempo = this._get_score(list[i], aclone, depth - 1, -turn, score);
-      if (turn * score_tempo >= turn * score) {
-        score = score_tempo;
-      }
-      if (score * turn > score_parent * turn) {
-        break;
+      let clone1 = aclone.clone();
+
+      score_tempo1 = this._get_score(list[i], clone1, depth - 1, next_turn, score1);
+      if (turn > 0) {
+        if (score_tempo1 <= score1) {
+          score1 = score_tempo1;
+        }
+        if (score1 > score_parent) {
+          break;
+        }
+      } else {
+        if (score_tempo1 >= score1) {
+          score1 = score_tempo1;
+        }
+        if (score1 < score_parent) {
+          break;
+        }
       }
     }
-    return score;
+    return score1;
   }
 
-  _evaluer(move, clone, turn, depth) {
-    let score = 0;
-    if (clone._carre(move)) {
-      score = turn * 100 * (10 ^ depth);
+  _evaluer(move, clone2, turn, depth) {
+    let score2 = 0;
+    if (clone2._carre(move)) {
+      score2 = turn * Math.pow(100, depth);
     }
-    score = score + turn * (7 - Math.abs((move._abs + move._ord) - 7));
-    return score;
+    score2 = score2 + turn * clone2._color_count[parseInt(move._color)];
+    return score2;
   }
-
 }
 
 export default Player;
