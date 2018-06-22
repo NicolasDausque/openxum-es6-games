@@ -163,8 +163,7 @@ class Engine extends OpenXum.Engine {
   _victory(move) {
     if (this._fullboard() === true) {
       this._phase = Phase.TIE;
-    }
-    else if (this.get_possible_move_list().length === 0) {
+    } else if (this.get_possible_move_list().length === 0) {
       this._phase = Phase.FINISH;
     } else if (this._carre(move)) {
       this._phase = Phase.FINISH;

@@ -1,8 +1,8 @@
 "use strict";
-import Move from '../move.mjs';
 
 class Player {
   constructor(c, e, depth) {
+
     this._color = c;
     this._engine = e;
     this._depth = depth;
@@ -13,10 +13,11 @@ class Player {
     let chosenMove = null; // possibleMoves[Math.floor(Math.random() * (possibleMoves.length - 1))];
     let score0 = -10000000;
     let score_tempo0;
+    let clone0;
 
     for (let i = 0; i < possibleMoves.length - 1; i++) {
-      let clone = this._engine.clone();
-      score_tempo0 = this._get_score(possibleMoves[i], clone, this._depth - 1, 1, score0);
+      clone0 = this._engine.clone();
+      score_tempo0 = this._get_score(possibleMoves[i], clone0, this._depth - 1, 1, score0);
       if (score_tempo0 >= score0) {
         score0 = score_tempo0;
         chosenMove = possibleMoves[i];
@@ -26,10 +27,11 @@ class Player {
   }
 
   _get_score(move, aclone, depth, turn, score_parent) {
-    let score1 = 0;
+    let score1;
     let list;
     let next_turn = -turn;
     let score_tempo1 = next_turn * 10000;
+    let clone1;
 
     aclone.move(move);
     if (depth === 0) {
@@ -39,9 +41,10 @@ class Player {
       return turn * Math.pow(100, depth);
     }
     list = aclone.get_possible_move_list();
-    for (let i = 0; i < list.length - 1; i++) {
-      let clone1 = aclone.clone();
-
+    clone1 = aclone.clone();
+    score1 = this._get_score(list[0], clone1, depth - 1, next_turn, score1);
+    for (let i = 1; i < list.length - 1; i++) {
+      clone1 = aclone.clone();
       score_tempo1 = this._get_score(list[i], clone1, depth - 1, next_turn, score1);
       if (turn > 0) {
         if (score_tempo1 <= score1) {
